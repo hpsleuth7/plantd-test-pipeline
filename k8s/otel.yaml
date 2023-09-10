@@ -1,0 +1,92 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+  namespace: test-pipeline
+data:
+  collector.yaml: |-
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+
+    processors:
+      batch:
+
+    exporters:
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+      logging:
+        verbosity: detailed
+
+    connectors:
+      spanmetrics:
+
+    extensions:
+      health_check:
+
+    service:
+      extensions: [health_check]
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [logging, spanmetrics]
+        metrics:
+          receivers: [spanmetrics]
+          exporters: [prometheus]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opentelemetrycollector
+  namespace: test-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: opentelemetrycollector
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: opentelemetrycollector
+    spec:
+      containers:
+      - name: otelcol
+        args:
+        - --config=/conf/collector.yaml
+        image: otel/opentelemetry-collector-contrib
+        volumeMounts:
+        - mountPath: /conf
+          name: otel-collector-config
+      volumes:
+      - configMap:
+          items:
+          - key: collector.yaml
+            path: collector.yaml
+          name: otel-collector-config
+        name: otel-collector-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opentelemetrycollector
+  namespace: test-pipeline
+spec:
+  ports:
+  - name: grpc-otlp
+    port: 4317
+    protocol: TCP
+    targetPort: 4317
+  - name: prometheus-port
+    port: 8888
+    protocol: TCP
+    targetPort: 8888
+  - name: prometheus-port-1
+    port: 8889
+    protocol: TCP
+    targetPort: 8889
+  selector:
+    app.kubernetes.io/name: opentelemetrycollector
+  type: ClusterIP

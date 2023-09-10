@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phase2-deployment
+  namespace: test-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phase2
+  template:
+    metadata:
+      labels:
+        app: phase2
+    spec:
+      containers:
+        - name: phase2
+          image: datawindtunnel/v2x-service:latest
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: tmp-volume
+              mountPath: /tmp
+          env:
+            - name: KAFKA_BOOTSTRAP
+              value: "kafka-service:9092"
+            - name: BASE_PATH
+              value: "/tmp"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "opentelemetrycollector:4317"
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}

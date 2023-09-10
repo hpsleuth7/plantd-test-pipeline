@@ -1,0 +1,13 @@
+FROM bitnami/mariadb
+
+ENV PYTHONUNBUFFERED=1
+
+ENV MARIADB_ROOT_PASSWORD 123456
+ADD data_models/pipeline.product.ddl /docker-entrypoint-initdb.d/
+ADD data_models/pipeline.supplier.ddl /docker-entrypoint-initdb.d/
+ADD data_models/pipeline.warehouse.ddl /docker-entrypoint-initdb.d/
+
+ADD scripts/mysql_data_model_setup.sh /docker-entrypoint-initdb.d/
+WORKDIR /docker-entrypoint-initdb.d
+
+EXPOSE 3306

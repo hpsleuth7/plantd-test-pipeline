@@ -1,0 +1,23 @@
+apiVersion: data.windtunnel/v1alpha1
+kind: LoadPattern
+metadata:
+  labels:
+    app.kubernetes.io/name: loadpattern
+    app.kubernetes.io/instance: loadpattern
+    app.kubernetes.io/part-of: plantd
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: plantd
+  name: loadpattern-test-pipeline
+  namespace: test-pipeline
+spec:
+  stages:
+    - target: 10
+      duration: 4m
+    - target: 50
+      duration: 3m
+    - target: 40
+      duration: 3m
+  preAllocatedVUs: 30
+  startRate: 30
+  maxVUs: 100
+  timeUnit: 1s

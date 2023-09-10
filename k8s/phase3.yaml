@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phase3-deployment
+  namespace: test-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phase3
+  template:
+    metadata:
+      labels:
+        app: phase3
+    spec:
+      containers:
+        - name: phase3
+          image: datawindtunnel/phase3-service:latest
+          volumeMounts:
+            - name: tmp-volume
+              mountPath: /tmp
+          env:
+            - name: KAFKA_BOOTSTRAP
+              value: "kafka-service:9092"
+            - name: BASE_PATH
+              value: "/tmp"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "opentelemetrycollector:4317"
+            - name: MYSQL_USER
+              value: local
+            - name: MYSQL_PASSWORD
+              value: "123456"
+            - name: MYSQL_HOST
+              value: mariadb-service
+            - name: MYSQL_DATABASE
+              value: pipeline
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}

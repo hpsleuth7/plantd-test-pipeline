@@ -1,0 +1,10 @@
+boto3==1.17.96
+botocore==1.20.96
+fastapi
+kafka-python==2.0.2
+opentelemetry-api
+opentelemetry-exporter-otlp-proto-grpc
+opentelemetry-sdk
+requests==2.25.1
+urllib3==1.26.5
+zipp==3.4.1
