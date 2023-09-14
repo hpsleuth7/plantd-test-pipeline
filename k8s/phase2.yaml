@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: phase2
-          image: datawindtunnel/v2x-service:latest
+          image: datawindtunnel/phase2-service:latest
           ports:
             - containerPort: 3000
           volumeMounts:

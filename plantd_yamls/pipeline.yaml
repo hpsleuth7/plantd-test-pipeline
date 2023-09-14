@@ -1,19 +1,19 @@
-apiVersion: data.windtunnel/v1alpha1
+apiVersion: windtunnel.plantd.org/v1alpha1
 kind: Pipeline
 metadata:
   labels:
     app.kubernetes.io/name: pipeline
     app.kubernetes.io/instance: pipeline-test-pipeline
-    app.kubernetes.io/part-of: plantd
+    app.kubernetes.io/part-of: plantd-operator
     app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: plantd
+    app.kubernetes.io/created-by: plantd-operator
   name: pipeline-test-pipeline
   namespace: test-pipeline
 spec:
   pipelineEndpoints:
     - name: upload
       http:
-        url: http://extract-service.test-pipeline.svc.cluster.local:3000/upload
+        url: http://phase1-service.test-pipeline.svc.cluster.local:3000/upload
         method: POST
         body: 
           dataSetRef: 

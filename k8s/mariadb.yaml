@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: datawindtunnel/test-pipeline-mariadb:latest
+          image: datawindtunnel/pipeline-db:latest
           ports:
             - containerPort: 3306
           env:

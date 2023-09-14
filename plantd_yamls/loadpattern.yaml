@@ -1,12 +1,12 @@
-apiVersion: data.windtunnel/v1alpha1
+apiVersion: windtunnel.plantd.org/v1alpha1
 kind: LoadPattern
 metadata:
   labels:
     app.kubernetes.io/name: loadpattern
     app.kubernetes.io/instance: loadpattern
-    app.kubernetes.io/part-of: plantd
+    app.kubernetes.io/part-of: plantd-operator
     app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: plantd
+    app.kubernetes.io/created-by: plantd-operator
   name: loadpattern-test-pipeline
   namespace: test-pipeline
 spec:

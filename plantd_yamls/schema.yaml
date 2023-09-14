@@ -1,12 +1,12 @@
-apiVersion: data.windtunnel/v1alpha1
+apiVersion: windtunnel.plantd.org/v1alpha1
 kind: Schema
 metadata:
   labels:
     app.kubernetes.io/name: schema
     app.kubernetes.io/instance: schema
-    app.kubernetes.io/part-of: plantd
+    app.kubernetes.io/part-of: plantd-operator
     app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: plantd
+    app.kubernetes.io/created-by: plantd-operator
   name:  product
   namespace: test-pipeline
 spec:
@@ -18,18 +18,18 @@ spec:
   - name: quantity
     type: number
     params:
-      min: 10
-      max: 50
+      min: "10"
+      max: "50"
 ---
-apiVersion: data.windtunnel/v1alpha1
+apiVersion: windtunnel.plantd.org/v1alpha1
 kind: Schema
 metadata:
   labels:
     app.kubernetes.io/name: schema
     app.kubernetes.io/instance: schema
-    app.kubernetes.io/part-of: plantd
+    app.kubernetes.io/part-of: plantd-operator
     app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: plantd
+    app.kubernetes.io/created-by: plantd-operator
   name:  supplier
   namespace: test-pipeline
 spec:
@@ -46,18 +46,18 @@ spec:
   - name: supplies_available
     type: number
     params:
-      min: 100
-      max: 500
+      min: "100"
+      max: "500"
 ---
-apiVersion: data.windtunnel/v1alpha1
+apiVersion: windtunnel.plantd.org/v1alpha1
 kind: Schema
 metadata:
   labels:
     app.kubernetes.io/name: schema
     app.kubernetes.io/instance: schema
-    app.kubernetes.io/part-of: plantd
+    app.kubernetes.io/part-of: plantd-operator
     app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: plantd
+    app.kubernetes.io/created-by: plantd-operator
   name:  warehouse
   namespace: test-pipeline
 spec:
@@ -70,14 +70,14 @@ spec:
     type: uuid
     formula:
       name: Copy
-      args: ["Supplier.supplier_id"]
+      args: ["supplier.supplier_id"]
   - name: product_id
     type: uuid
     formula:
       name: Copy
-      args: ["Product.product_id"]
+      args: ["product.product_id"]
   - name: total_availability
     type: number
     params:
-      min: 100
-      max: 500
+      min: "100"
+      max: "500"
