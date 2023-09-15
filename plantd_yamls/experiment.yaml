@@ -1,4 +1,4 @@
-apiVersion: data.windtunnel/v1alpha1
+apiVersion: windtunnel.plantd.org/v1alpha1
 kind: Experiment
 metadata:
   labels:
@@ -16,5 +16,5 @@ spec:
   loadPatterns:
     - endpointName: upload
       loadPatternRef:
-        name: loadpattern
+        name: loadpattern-test-pipeline
         namespace: test-pipeline

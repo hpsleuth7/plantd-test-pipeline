@@ -17,7 +17,7 @@ spec:
         method: POST
         body: 
           dataSetRef: 
-            name: dataset
+            name: dataset-test-pipeline
             namespace: test-pipeline
   inCluster: true
   cloudVendor: aws
