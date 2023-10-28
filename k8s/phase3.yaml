@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: phase3
-          image: datawindtunnel/phase3-service:latest
+          image: datawindtunnel/phase3-service:murph
           volumeMounts:
             - name: tmp-volume
               mountPath: /tmp
