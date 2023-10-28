@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: phase1
-          image: datawindtunnel/phase1-service:latest
+          image: datawindtunnel/phase1-service:murph
           ports:
             - containerPort: 3000
           volumeMounts:
