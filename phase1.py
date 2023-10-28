@@ -88,7 +88,7 @@ async def upload(file: UploadFile = File(...)):
 				return {"status": "Success: time skip.", "code": 201}
 			print("Not skipping time") 
 			# do dummy work
-			for i in range(1000000):
+			for i in range(10000):
 				for j in range(2, i):
 					if i % j == 0:
 						break
