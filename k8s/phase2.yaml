@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phase2-deployment
-  namespace: test-pipeline
+  namespace: murph-dev
 spec:
   replicas: 1
   selector:

@@ -4,6 +4,7 @@ import io
 import csv
 import sys
 import os
+import time
 from fastapi import FastAPI, UploadFile, File
 from json import dumps
 from utils import config
@@ -80,7 +81,17 @@ async def upload(file: UploadFile = File(...)):
 	with tracer.start_as_current_span("extract_phase", kind=SpanKind.SERVER) as span:
 		try:
 			
-			
+			# get current time in seconds
+			skip_time = 2 # number of seconds in skip interval
+			if (int(time.time()) // skip_time) % 2 == 0:
+				return {"status": "Success: time skip.", "code": 201}
+			 
+			# do dummy work
+			for i in range(1000000):
+				for j in range(i):
+					if i % j == 0:
+						break
+
 			# Read the binary content of the uploaded zip file
 			zip_data = await file.read()
 

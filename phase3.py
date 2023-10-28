@@ -67,6 +67,12 @@ def consume_and_load(db_config, message):
     """
 	extract_context = trace.get_current_span().get_span_context()
 	message = loads(message.value)
+
+	# write output to file at persistent volume 
+	with open("/dummy/output.txt", "a") as f:
+		f.write(f"Message received: {message}\n")
+	f.close()
+
 	ctx = utils.get_parent_context(message["traceId"], message["spanId"])
 	with tracer.start_as_current_span(
 		'load_phase',               

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phase1-deployment
-  namespace: test-pipeline
+  namespace: murph-dev
 spec:
   replicas: 1
   selector:
@@ -37,7 +37,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: phase1-service
-  namespace: test-pipeline
+  namespace: murph-dev
+  annotations: 
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
 spec:
   selector:
     app: phase1

@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-collector-config
-  namespace: test-pipeline
+  namespace: murph-dev
 data:
   collector.yaml: |-
     receivers:
@@ -41,7 +41,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: opentelemetrycollector
-  namespace: test-pipeline
+  namespace: murph-dev
 spec:
   replicas: 1
   selector:
@@ -72,7 +72,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: opentelemetrycollector
-  namespace: test-pipeline
+  namespace: murph-dev
 spec:
   ports:
   - name: grpc-otlp

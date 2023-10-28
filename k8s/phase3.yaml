@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phase3-deployment
-  namespace: test-pipeline
+  namespace: murph-dev
 spec:
   replicas: 1
   selector:
@@ -19,6 +19,8 @@ spec:
           volumeMounts:
             - name: tmp-volume
               mountPath: /tmp
+            - name: dummy-volume
+              mountPath: /dummy
           env:
             - name: KAFKA_BOOTSTRAP
               value: "kafka-service:9092"
@@ -37,3 +39,19 @@ spec:
       volumes:
         - name: tmp-volume
           emptyDir: {}
+        - name: dummy-volume
+          persistentVolumeClaim: 
+            claimName: phase3-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: phase3-pv-claim
+  namespace: murph-dev
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
