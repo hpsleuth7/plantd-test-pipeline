@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/part-of: plantd-operator
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: plantd-operator
-  name: dataset-test-pipeline
+  name: murph-dataset
   namespace: test-pipeline
 spec:
   # the file format of the each file containing the generated data 
