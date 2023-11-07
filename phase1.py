@@ -82,7 +82,7 @@ async def upload(file: UploadFile = File(...)):
 		try:
 			
 			# get current time in seconds
-			skip_time = 30 # number of seconds in skip interval
+			skip_time = 60 # number of seconds in skip interval
 			if (int(time.time()) // skip_time) % 2 == 0:
 				print("Skipping time")
 				return {"status": "Success: time skip.", "code": 201}
