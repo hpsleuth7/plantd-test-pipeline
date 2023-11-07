@@ -23,7 +23,9 @@ spec:
               mountPath: /tmp
           env:
             - name: OPENCOST_ENDPOINT
-              value: "http://opencost.opencost.svc.cluster.local:9003"
+              value: "http://opencost.opencost.svc.cluster.local:9003/allocation"
+            - name: PROMETHEUS_ENDPOINT
+              value: "http://prometheus.plantd-operator-system.svc.cluster.local:9090/api/v1/query"
       volumes:
         - name: tmp-volume
           emptyDir: {}
